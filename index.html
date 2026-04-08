@@ -1,98 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmniOut POC</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><title>Vlocity OmniScript LWC Components</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/><link rel="shortcut icon" href="/vlocityresources/favicon.ico"/><link rel="stylesheet" href="/slds/assets/styles/salesforce-lightning-design-system.css"><link rel="stylesheet" href="/vlocityresources/slds/styles/OmniLwcUtilsCss.css"><script src="/vlocityresources/javascript/VlocityPdf.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/jsforce/1.9.1/jsforce.min.js"></script><script defer="defer" src="/app-d1ba83a8b9163aaa1534.js"></script></head><body><noscript><div class="unsupported"><div class="unsupported_title">LWC app can't be loaded!</div><div class="unsupported_message">This application requires javascript to work properly.</div></div></noscript><div id="outdated" style="display: none"><div class="unsupported"><div class="unsupported_title">App can't be loaded!</div><div class="unsupported_message"></div></div></div><script nomodule>const {
+        outdated
+      } = window;
+      outdated.style.display = 'unset';
+      outdated.querySelector('.unsupported_message').textContent =
+        'This application requires a more recent version of your browser';</script><script defer="defer">/**
+       * A sample connection that uses jsForce to request data from the backend.
+       * This sample connection is for demo purposes and can be used to test
+       * the OmniOut LWC project locally. This connection sample is not intended
+       * to be used as production connection code.
+       **/
+      function JSForceConnectionExample() {
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #f4f6f9;
+        const connection = new jsforce.Connection({
+          // Set your jsForce configuration here
+          accessToken: '00DdN00000ucZUL!AQEAQKz4CQGXIPW9Zl_8ojEt.CnRWk1m1knfcTHEASVIgz9H30HQq7w2AnYbeuv8J4f8PuqqZw8m2vCPiC_zGYP7YYXvpO6e', 
+          instanceUrl: 'https://pricewaterhousecoopers2.my.salesforce.com' 
+        });
+
+        /**
+         * Expose the request method
+         **/
+        this.request = request;
+
+        /**
+         * @type {string} The namespace of the package
+         **/
+        this.namespace = 'omnistudio';
+
+        /**
+         * Instance Url for salesforce connection
+         **/
+        this.instanceUrl = connection.instanceUrl;
+
+        /**
+         * Uncomment ONLY if your integration user is a community user (not a platform user).
+         * Use the NetworkId where the community user belongs to.
+         * For example:
+         *    SELECT Id from Network where DeveloperName = 'THE_NAME_OF_THE_COMMUNITY'
+         **/
+        // this.networkId = '';
+
+        /**
+         * A function that executes the HTTP requests.
+         * @type {string} The target URL.
+         * @type {Object} The data that will be sent to the target URL.
+         **/
+        function request(url, data) {
+          return connection.requestPost(url, data);
         }
+      }
 
-        header {
-            background-color: #0176d3;
-            color: white;
-            padding: 15px;
-            text-align: center;
+      /**
+       * Once the component is ready, an event is dispatched to let the DOM knows that a connection is expected.
+       **/
+      document.addEventListener('omnioutcomponentready', evt => {
+        if (evt.detail && evt.detail.omnioutcomponent) {
+          evt.srcElement.connection = new JSForceConnectionExample();
         }
-
-        nav {
-            background-color: #16325c;
-            padding: 10px;
-            text-align: center;
-        }
-
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .container {
-            padding: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
-        }
-
-        footer {
-            background-color: #16325c;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
-</head>
-
-<body>
-
-<header>
-    <h1>My OmniOut Website</h1>
-    <p>POC using GitHub Pages</p>
-</header>
-
-<nav>
-    <a href="#">Home</a>
-    <a href="#">OmniOut</a>
-    <a href="#">Contact</a>
-</nav>
-
-<div class="container">
-
-    <div class="card">
-        <h2>Welcome</h2>
-        <p>This is a sample website hosted on GitHub Pages.</p>
-    </div>
-
-    <div class="card">
-        <h2>OmniOut Section</h2>
-
-        <!-- THIS IS WHERE YOU WILL PLACE OMNIOUT -->
-        <div id="omniout-container">
-            <p>OmniOut app will load here...</p>
-           
-        </div>
-
-    </div>
-
-</div>
- <vlocityomniscript-intake-application-form-english run-mode="localScriptDef"></vlocityomniscript-intake-application-form-english>
-<footer>
-    <p>© 2026 OmniOut POC</p>
-</footer>
-
-</body>
-<script defer="defer" src="./app-d1ba83a8b9163aaa1534.js"></script>
-</html>
+      });</script><vlocityomniscript-intake-application-form-english run-mode="localScriptDef"></vlocityomniscript-intake-application-form-english></body></html>
